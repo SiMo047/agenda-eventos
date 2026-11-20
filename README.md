@@ -1,6 +1,6 @@
-# Agenda · eventos y experiencias
+# Agenda de eventos
 
-Aplicación web para una agencia: publica una agenda de eventos y las experiencias que ofrecen empresas de la zona, y gestiona las inscripciones de los asistentes. La hice durante el ciclo de Desarrollo de Aplicaciones Web (DAW, 2024).
+Aplicación web para una agencia: publica una agenda de eventos y las experiencias que ofrecen empresas de la zona, y gestiona las inscripciones. La hice en 2024 con Laravel.
 
 ![Agenda de eventos](docs/eventos.jpg)
 
@@ -9,36 +9,21 @@ Aplicación web para una agencia: publica una agenda de eventos y las experienci
 | ![Ficha](docs/detalle.jpg) | ![Panel](docs/panel.jpg) |
 
 ## Qué hace
-**Web pública**
-- Agenda de eventos con filtro por categoría y por «esta semana» o «este mes».
-- Ficha de cada evento: fecha, hora, lugar, aforo e imagen.
-- Experiencias de empresas y página «Explora» con información turística.
 
-**Tres tipos de usuario**
-- **Administrador:** gestiona categorías, empresas, experiencias, usuarios y todos los eventos.
-- **Creador de eventos:** crea, edita y borra **sus** eventos, y ve las inscripciones que reciben.
-- **Asistente:** se registra y se inscribe a los eventos eligiendo el número de entradas.
+La web pública muestra la agenda, que se puede filtrar por categoría o por esta semana y este mes, la ficha de cada evento y las experiencias de las empresas.
 
-**Reglas de las inscripciones**
-- Una inscripción por persona y evento.
-- Nunca más entradas que el máximo por persona de ese evento.
-- No se puede pasar del aforo del evento: se avisa de cuántas entradas quedan.
-- Solo se admiten inscripciones en eventos abiertos.
+Hay tres tipos de usuario. El administrador gestiona categorías, empresas, experiencias, usuarios y todos los eventos. El creador de eventos solo ve y edita los suyos, y las inscripciones que reciben. El asistente se registra y se apunta a los eventos eligiendo cuántas entradas quiere.
 
-**API REST** (`/api/v1/agencult/...`)
-- **Pública:** consultar eventos, categorías y experiencias.
-- **Con token (Laravel Sanctum):** crear y borrar eventos, y consultar asistentes y sus inscripciones.
+Al inscribirse se comprueba que no se haya apuntado ya, que no pida más entradas de las permitidas por persona, que quede aforo y que el evento siga abierto.
 
-## Tecnologías
-Laravel · PHP · MySQL · Blade · Tailwind CSS · Laravel Breeze · Laravel Sanctum
+También tiene una API (`/api/v1/agencult/...`). Consultar eventos, categorías y experiencias es público. Crear o borrar eventos y ver los datos de los asistentes necesita token (Laravel Sanctum).
 
-## Base de datos
-`users` (con rol) · `categorias` · `eventos` · `inscripciones` · `empresas` · `experiencias`
-- Un evento pertenece a una categoría y a su creador.
-- Una inscripción une a un asistente con un evento.
-- Una experiencia pertenece a una empresa.
+Tecnologías: Laravel, PHP, MySQL, Blade, Tailwind CSS, Laravel Breeze y Laravel Sanctum.
+
+Tablas principales: `users` (con rol), `categorias`, `eventos`, `inscripciones`, `empresas` y `experiencias`.
 
 ## Cómo arrancarlo
+
 ```bash
 composer install
 npm install && npm run build
